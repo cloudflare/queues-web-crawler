@@ -1,0 +1,19 @@
+name = "queues-web-crawler-consumer"
+main = "src/index.ts"
+compatibility_date = "2023-06-09"
+node_compat = true
+usage_model = "unbound"
+
+browser = { binding = "CRAWLER_BROWSER", type = "browser" }
+kv_namespaces = [
+{ binding = "CRAWLER_SCREENSHOTS_KV", id = "<KV namespace id here>", preview_id = "<KV namespace id here>" },
+{ binding = "CRAWLER_LINKS_KV", id = "<KV namespace id here>", preview_id = "<KV namespace id here>" }
+]
+
+[[queues.consumers]]
+  queue = "<queue name>"
+  max_batch_timeout = 60 
+
+[[queues.producers]]
+ queue = "<queue name>"
+ binding = "CRAWLER_QUEUE"

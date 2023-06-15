@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Queues Web Crawler Example</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css"
+    />
+  </head>
+  <body
+    style="
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      height: 100%;
+      margin-top: -5vh;
+      max-width: 600px;
+    "
+  >
+    <div style="position: relative">
+      <h1>Queues Web Crawler Example</h1>
+      <p>
+        A web crawler + archiving tool built with
+        <a href="https://developers.cloudflare.com/queues/">Queues</a>,
+        <a href="https://developers.cloudflare.com/pages/platform/functions/"
+          >Pages Functions</a
+        >, and
+        <a href="https://developers.cloudflare.com/browser-rendering/"
+          >Browser Rendering</a
+        >. A Pages Function bound to a Queue sends the requested site to the
+        Queue, which uses Browser Rendering and Puppeteer to do some crawling. A
+        Worker consuming from the Queue archives some site details to Workers
+        KV.
+      </p>
+      <form action="javascript:void(0);">
+        <label for="site-url">Site URL:</label>
+        <input type="url" id="site-url" />
+        <button onclick="sendURL()">Go!</button>
+      </form>
+    </div>
+  </body>
+
+  <style>
+    :root {
+      --links: #f6821f;
+      --focus: rgba(251, 173, 65, 0.67);
+    }
+  </style>
+
+  <script>
+    const sendURL = async () => {
+      const url = document.getElementById("site-url").value;
+      if (!url) {
+        alert("Please provide a URL!");
+        return;
+      }
+      try {
+        const response = await fetch(`/requestToCrawlSite?url=${url}`);
+        alert(await response.text());
+      } catch (e) {
+        alert(`Error: ${e}`);
+        return;
+      }
+    };
+  </script>
+</html>
