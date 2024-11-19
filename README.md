@@ -8,8 +8,6 @@ For this project, Queues helps batch sites to be crawled, which limits the overh
 
 ## Development
 
-This assumes you have access to the Browser Rendering feature - you can join the waitlist [here](https://www.cloudflare.com/lp/workers-browser-rendering-api).
-
 First, fork this project. Install [Node.js](https://nodejs.org/en/download) and [Wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/), and run `npm install`.
 
 Then, to configure your project and deploy on Cloudflare Workers:
